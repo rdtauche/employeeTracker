@@ -11,6 +11,7 @@ CREATE TABLE departments (
   departmentName VARCHAR(100)
 );
 
+-- create table roles
 CREATE TABLE roles (
   roleID INTEGER,
   jobTitle VARCHAR(100),
@@ -18,6 +19,7 @@ CREATE TABLE roles (
   departmentID INTEGER
 );
 
+-- create table employees
 CREATE TABLE employees (
   employeeID INTEGER,
   firstName VARCHAR(100),
