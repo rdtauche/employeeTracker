@@ -6,27 +6,28 @@ CREATE DATABASE employeeTracker_db;
 -- Creates the table "departments" within inventory_db --
 CREATE TABLE departments (
   -- Creates a numeric column called "departmentid" --
-  departmentID INTEGER,
+  departmentID SERIAL PRIMARY KEY,
   -- Creates a string column called "departmentname" which can hold up to 100 characters --
-  departmentName VARCHAR(100)
+  departmentName VARCHAR(100) NOT NULL
 );
 
 -- create table roles
 CREATE TABLE roles (
-  roleID INTEGER,
-  jobTitle VARCHAR(100),
+  roleID SERIAL PRIMARY KEY,
+  jobTitle VARCHAR(100) NOT NULL,
   salary INTEGER,
-  departmentID INTEGER
+  departmentID INTEGER,
+  FOREIGN KEY (departmentID) REFERENCES departments(departmentID),
+  ON DELETE SET NULL
 );
 
 -- create table employees
 CREATE TABLE employees (
-  employeeID INTEGER,
-  firstName VARCHAR(100),
-  lastName VARCHAR(100),
-  jobTitle VARCHAR(100),
-  manager VARCHAR(100),
-  salary INTEGER,
-  departmentID INTEGER
-);
+  employeeID SERIAL PRIMARY KEY,
+  firstName VARCHAR(100) NOT NULL,
+  lastName VARCHAR(100) NOT NULL,
+  jobTitle VARCHAR(100) NOT NULL,
+  manager VARCHAR(100) NOT NULL,
+  salary INTEGER
+  );
 
