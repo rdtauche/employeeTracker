@@ -25,18 +25,11 @@ const pool = new Pool(
 
 pool.connect();
 
-// Hardcoded query: DELETE FROM course_names WHERE id = 3;
-pool.query(`DELETE FROM course_names WHERE id = $1`, [3], (err, { rows }) => {
-  if (err) {
-    console.log(err);
-  }
-  console.log(rows);
-});
 
 // Query database
 pool.query(
-  "SELECT * FROM course_names where id=$1",
-  [2],
+  "SELECT * FROM departments where departmentname=$1",
+  ["Engineering"],
   function (err, { rows }) {
     console.log(rows);
   }
