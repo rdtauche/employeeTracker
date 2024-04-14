@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
+    "inquirer": "^9.2.18",
     "pg": "^8.11.5"
   }
 }
