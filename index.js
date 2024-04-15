@@ -46,9 +46,9 @@ const userPrompts = () => {
       choices: ['View all departments', 
                 'View all roles', 
                 'View all employees', 
-                'Add a department', 
-                'Add a role', 
-                'Add an employee' 
+                // 'Add a department', 
+                // 'Add a role', 
+                // 'Add an employee' 
               ]
     }
   ])
@@ -67,17 +67,17 @@ const userPrompts = () => {
         showEmployees();
       }
 
-      if (choices === "Add a department") {
-        addDepartment();
-      }
+      // if (choices === "Add a department") {
+      //   addDepartment();
+      // }
 
-      if (choices === "Add a role") {
-        addRole();
-      }
+      // if (choices === "Add a role") {
+      //   addRole();
+      // }
 
-      if (choices === "Add an employee") {
-        addEmployee();
-      };
+      // if (choices === "Add an employee") {
+      //   addEmployee();
+      // };
   });
 };
 
@@ -88,7 +88,8 @@ showDepartments = () => {
 
   pool.query(sql, (err, rows) => {
     if (err) throw err;
-    console.table(rows);
+    console.log(rows.rows);
+    console.table(rows.rows); 
     userPrompts();
   });
 };
@@ -114,21 +115,12 @@ showEmployees = () => {
 
   pool.query(sql, (err, rows) => {
     if (err) throw err; 
-    console.table(rows);
+    console.log(rows.rows);
+    console.table(rows.rows); 
     userPrompts();
   });
 };
 
-// function to add a department 
-addDepartment = () => {
-  console.log('Add a department...\n'); 
-  const sql = `INSERT INTO departments (departmentname) VALUES ?, ?`;
 
-  pool.query(sql, (err, rows) => {
-    if (err) throw err; 
-    console.table(rows);
-    userPrompts();
-  });
-};
 
 userPrompts();
