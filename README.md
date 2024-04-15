@@ -34,7 +34,7 @@ Link to full requirements for challenge:  https://bootcampspot.instructure.com/c
     3. Once complete, go to pages and deploy the website live
 
 ## My Results
-    1. Our Github Repo:  https://github.com/rdtauche/employeeTracker
+    1. My Github Repo:  https://github.com/rdtauche/employeeTracker
     2. Live record of screen showing features: https://drive.google.com/file/d/10yJXbQR_RYssc5OQ_mmq3tywmNGRRCg7/view
     
 
