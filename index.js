@@ -46,9 +46,10 @@ const userPrompts = () => {
       choices: ['View all departments', 
                 'View all roles', 
                 'View all employees', 
-                // 'Add a department', 
-                // 'Add a role', 
-                // 'Add an employee' 
+                'Add a department', 
+                'Add a role', 
+                'Add an employee', 
+                'Remove an employee',
               ]
     }
   ])
@@ -67,17 +68,20 @@ const userPrompts = () => {
         showEmployees();
       }
 
-      // if (choices === "Add a department") {
-      //   addDepartment();
-      // }
+      if (choices === "Add a department") {
+        addDepartment();
+      }
 
-      // if (choices === "Add a role") {
-      //   addRole();
-      // }
+      if (choices === "Add a role") {
+        addRole();
+      }
 
-      // if (choices === "Add an employee") {
-      //   addEmployee();
-      // };
+      if (choices === "Add an employee") {
+        addEmployee();
+      }
+      if (choices === "Remove an employee") {
+        removeEmployee();
+      };
   });
 };
 
@@ -121,6 +125,119 @@ showEmployees = () => {
   });
 };
 
+// function to add a department
+
+addDepartment = () => {
+  console.log('Adding a department...\n');
+
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'departmentname',
+      message: 'Please enter the name of the department.'
+    }
+  ])
+    .then((answers) => {
+      const { departmentname } = answers; 
+      const sql = `INSERT INTO departments (departmentname) VALUES ($1)`;
+      const params = [departmentname]; 
+
+      pool.query(sql, params, (err, rows) => {
+        if (err) throw err; 
+        console.log('Department added successfully!'); 
+        console.table(rows.rows); 
+        userPrompts();
+      });
+    });
+}
+
+// function to add a role
+addRole = () => {
+  console.log('Adding a role...\n');
+
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'jobtitle',
+      message: 'Please enter the title of the role.'
+    },
+    {
+      type: 'input',
+      name: 'salary',
+      message: 'Please enter the salary of the role.'
+    },
+    {
+      type: 'input',
+      name: 'departmentid',
+      message: 'Please enter the department id of the role.'
+    }
+  ])
+    .then((answers) => {
+      console.log(answers);
+      const { jobtitle, salary, departmentid } = answers; 
+      const sql = `INSERT INTO roles (jobtitle, salary, departmentid) VALUES ($1, $2, $3)`;
+      const params = [jobtitle, salary, departmentid]; 
+
+      pool.query(sql, params, (err, rows) => {
+        if (err) throw err; 
+        console.log('Role added successfully!'); 
+        console.table(rows.rows); 
+        userPrompts();
+      });
+    });
+}
+
+// function to add an employee
+addEmployee = () => {
+  console.log('Adding an employee...\n');
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'firstname',
+      message: 'Please enter the first name of the employee.'
+    },
+    {
+      type: 'input',
+      name: 'lastname',
+      message: 'Please enter the last name of the employee.'
+    }
+  ])
+    .then((answers) => {
+      const { firstname, lastname} = answers; 
+      const sql = `INSERT INTO employees (firstname, lastname) VALUES ($1, $2)`;
+      const params = [firstname, lastname]; 
+
+      pool.query(sql, params, (err, rows) => {
+        if (err) throw err; 
+        console.log('Employee added successfully!'); 
+        console.table(rows.rows); 
+        userPrompts();
+      });
+    });}
+
+    // function to remove an employee
+    removeEmployee = () => {
+      console.log('Removing an employee...\n');
+      inquirer.prompt([
+        {
+          type: 'input',
+          name: 'id',
+          message: 'Please enter the id of the employee you would like to remove.'
+        }
+      ])
+        .then((answers) => {
+          const { id } = answers; 
+          const sql = `DELETE FROM employees WHERE employeeid = $1`;
+          const params = [id]; 
+    
+          pool.query(sql, params, (err, rows) => {
+            if (err) throw err; 
+            console.log('Employee removed successfully!'); 
+            console.table(rows.rows); 
+            userPrompts();
+          });
+        });
+    }
 
 
 userPrompts();

@@ -1,7 +1,6 @@
 DROP DATABASE IF EXISTS employeeTracker_db;
 CREATE DATABASE employeeTracker_db;
 
-\c employeeTracker_db;
 
 -- Creates the table "departments" within inventory_db --
 CREATE TABLE departments (
@@ -26,8 +25,8 @@ CREATE TABLE employees (
   employeeID SERIAL PRIMARY KEY,
   firstName VARCHAR(100) NOT NULL,
   lastName VARCHAR(100) NOT NULL,
-  jobTitle VARCHAR(100) NOT NULL,
-  manager VARCHAR(100) NOT NULL,
+  jobTitle VARCHAR(100),
+  manager VARCHAR(100),
   salary INTEGER
   );
 
